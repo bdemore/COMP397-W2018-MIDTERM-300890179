@@ -23,8 +23,7 @@ module objects {
         this.y = -960;
       }
       if (managers.Game.currentScene == config.Scene.LEVEL2) {
-        this.x = 800;
-        this.rotation = 90;
+        this.x = 960; 
       }
 
     }
@@ -55,7 +54,7 @@ module objects {
         }
       }
       if (managers.Game.currentScene == config.Scene.LEVEL2) {
-        if (this.x >= 0) {
+        if (this.x >= 960) {
           this._reset();
         }
       }
@@ -74,6 +73,7 @@ module objects {
         this._reset();
       }
       if (managers.Game.currentScene == config.Scene.LEVEL2) {
+        this.rotation = 90;
         this._dx = 5;
         this._reset();
       }

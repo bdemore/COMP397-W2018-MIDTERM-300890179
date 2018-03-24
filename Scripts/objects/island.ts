@@ -28,9 +28,11 @@ module objects {
 
     // reset the objects location to some value
     public Reset(): void {
+      if (managers.Game.currentScene == config.Scene.PLAY) {
       this.x = Math.floor((Math.random() * (640 - this.width)) + this.halfWidth);
       this.y = -this.height;
     }
+  }
 
     // move the object to some new location
     public Move(): void {
