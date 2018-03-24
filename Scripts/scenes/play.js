@@ -65,7 +65,7 @@ var scenes;
                 managers.Game.currentScene = config.Scene.OVER;
             }
             // if player reaches 500 points, go to level2
-            if (this._scoreBoard.Score >= 500) {
+            if (this._scoreBoard.Score >= 200) {
                 managers.Game.currentScene = config.Scene.LEVEL2;
             }
         };
@@ -80,7 +80,8 @@ var scenes;
             this.addChild(this._coin);
             // add the plane to the scene
             this.addChild(this._plane);
-            this.addChild(this._plane.planeFlash); // add the plane flashing effect
+            // add the plane flashing effect
+            this.addChild(this._plane.planeFlash);
             // add clouds to the scene
             this._clouds.forEach(function (cloud) {
                 _this.addChild(cloud);

@@ -39,13 +39,25 @@ var objects;
         };
         // move the object to some new location
         Island.prototype.Move = function () {
-            this.y += this._dy;
+            if (managers.Game.currentScene == config.Scene.PLAY) {
+                this.y += this._dy;
+            }
+            if (managers.Game.currentScene == config.Scene.LEVEL2) {
+                this.x -= this._dx;
+            }
         };
         // check to see if some boundary has been passed
         Island.prototype.CheckBounds = function () {
             // check lower bounds
-            if (this.y >= 480 + this.height) {
-                this.Reset();
+            if (managers.Game.currentScene == config.Scene.PLAY) {
+                if (this.y >= 480 + this.height) {
+                    this.Reset();
+                }
+            }
+            if (managers.Game.currentScene == config.Scene.LEVEL2) {
+                if (this.x >= 640 + this.width) {
+                    this.Reset();
+                }
             }
         };
         return Island;

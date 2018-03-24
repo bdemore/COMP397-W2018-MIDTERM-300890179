@@ -13,8 +13,8 @@ module objects {
     }
 
     // private methods
-    private _animationEnded():void {
-      if(this.alpha == 0) {
+    private _animationEnded(): void {
+      if (this.alpha == 0) {
         this.alpha = 1;
         this.planeFlash.alpha = 0;
       }
@@ -23,56 +23,92 @@ module objects {
     // public methods
 
     // Initializes variables and creates new objects
-    public Start():void {
+    public Start(): void {
       this.planeFlash = new objects.PlaneFlash();
       this.planeFlash.alpha = 1;
-      this.planeFlash.on("animationend", this._animationEnded.bind(this), false );
+      this.planeFlash.on("animationend", this._animationEnded.bind(this), false);
+      if (managers.Game.currentScene == config.Scene.PLAY) {
+        this.x = 320;
+        this.y = 430;
+      }
+      if (managers.Game.currentScene == config.Scene.LEVEL2) {
+        this.rotation = 90;
+        this.x = 70;
+        this.y = 250;
+      }
 
-      this.x = 320;
-      this.y = 430;
+
     }
 
     // updates the game object every frame
-    public Update():void {
+    public Update(): void {
       this.Move();
       this.CheckBounds();
     }
 
     // reset the objects location to some value
-    public Reset():void {
+    public Reset(): void {
 
     }
 
     // move the object to some new location
-    public Move():void {
-     // mouse controls
-     // this.x = objects.Game.stage.mouseX;
+    public Move(): void {
+      // mouse controls
+      // this.x = objects.Game.stage.mouseX;
 
-     // keyboard controls
-     if(managers.Game.keyboardManager.moveLeft) {
-       this.x -= 5;
-     }
+      // keyboard controls
+      if (managers.Game.currentScene == config.Scene.PLAY) {
+        if (managers.Game.keyboardManager.moveLeft) {
+          this.x -= 5;
+        }
 
-     if(managers.Game.keyboardManager.moveRight) {
-       this.x += 5;
-     }
+        if (managers.Game.keyboardManager.moveRight) {
+          this.x += 5;
+        }
 
-     this.planeFlash.x = this.x;
-     this.planeFlash.y = this.y;
+        this.planeFlash.x = this.x;
+        this.planeFlash.y = this.y;
+      }
+
+      if (managers.Game.currentScene == config.Scene.LEVEL2) {
+        if (managers.Game.keyboardManager.moveForward) {
+          this.y -= 5;
+        }
+
+        if (managers.Game.keyboardManager.moveBackward) {
+          this.y += 5;
+        }
+
+        this.planeFlash.x = this.x;
+        this.planeFlash.y = this.y;
+      }
 
     }
 
     // check to see if some boundary has been passed
-    public CheckBounds():void {
+    public CheckBounds(): void {
+      if (managers.Game.currentScene == config.Scene.PLAY) {
       // right boundary
-      if(this.x >= 640 - this.halfWidth) {
+      if (this.x >= 640 - this.halfWidth) {
         this.x = 640 - this.halfWidth;
       }
 
       // left boundary
-      if(this.x <= this.halfWidth) {
+      if (this.x <= this.halfWidth) {
         this.x = this.halfWidth;
       }
+    }
+    if (managers.Game.currentScene == config.Scene.LEVEL2) {
+      // right boundary
+      if (this.y >= 480 - this.halfWidth) {
+        this.y = 480 - this.halfWidth;
+      }
+
+      // left boundary
+      if (this.y <= this.halfWidth) {
+        this.y = this.halfWidth;
+      }
+    }
     }
   }
 }
